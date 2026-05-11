@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Industry Insights | BIM, Drafting & AEC News Australia — Polar Studio</title>
+<meta name="description" content="Latest insights on BIM, technical drafting, As-Built documentation and Australian construction standards. Expert commentary from Polar Studio's Sydney-based team."/>
+<meta name="keywords" content="BIM news Australia, AEC industry insights, ISO 19650 updates, AS 1100 standards, technical drafting Australia, Revit BIM trends"/>
+<link rel="canonical" href="https://polarstudio.com.au/insights.html"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="polar.css"/>
+<style>
+
+/* ── INSIGHTS PAGE ── */
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.news-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.news-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+}
+.news-card-body {
+  padding: 28px 28px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.news-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.news-date {
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-left: auto;
+}
+.news-card h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.news-card p {
+  font-size: 14px;
+  color: var(--ink-mute);
+  line-height: 1.65;
+  flex: 1;
+}
+.news-card-footer {
+  padding: 16px 28px 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.news-read-more {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.news-read-more svg { width: 12px; height: 12px; transition: transform 0.2s; }
+.news-card:hover .news-read-more svg { transform: translateX(3px); }
+.news-read-time { font-size: 12px; color: var(--ink-mute); }
+
+/* ── MODAL ──
+   Key fix: modal is display:flex + flex-direction:column.
+   modal-header and modal-footer are flex-shrink:0 (never scroll, never overlap).
+   modal-scroll is flex:1 + overflow-y:auto (ONLY this element scrolls).
+   Result: zero overlap between header/title and body content. */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg-alt);
+  border-radius: 16px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 88vh;
+  /* Flex column: header fixed, body scrolls, footer fixed */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+  animation: modalIn 0.25s cubic-bezier(.2,.6,.2,1) forwards;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* HEADER — fixed, never scrolls */
+.modal-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+  background: var(--bg-alt);
+}
+.modal-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+  transition: background 0.15s;
+}
+.modal-close:hover { background: var(--line); }
+.modal-close svg { width: 14px; height: 14px; }
+.modal-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.6vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  color: var(--ink);
+}
+
+/* SCROLLABLE ZONE — only this scrolls */
+.modal-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.modal-scroll::-webkit-scrollbar { width: 4px; }
+.modal-scroll::-webkit-scrollbar-track { background: transparent; }
+.modal-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+.modal-body { padding: 28px 32px 24px; }
+.modal-body p {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+.modal-body p:last-child { margin-bottom: 0; }
+.modal-body h4 {
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 700;
+  color: var(--ink);
+  margin: 26px 0 10px;
+}
+.modal-body ul {
+  list-style: none; padding: 0;
+  margin: 0 0 18px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+/* li uses position:relative + padding-left for the bullet dot.
+   This allows strong { display:block } to actually create a new line,
+   since li is no longer a flex container. */
+.modal-body ul li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.modal-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px; height: 5px;
+  background: var(--ink-mute);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.modal-body ul li strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* Sources block */
+.modal-sources {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.modal-sources-title {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 10px;
+}
+.modal-sources ul { margin: 0; gap: 5px; }
+.modal-sources ul li::before { display: none; }
+.modal-sources ul li { font-size: 13px; color: var(--ink-mute); gap: 0; }
+.modal-sources ul li a {
+  color: var(--ink-mute);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  transition: color 0.15s;
+}
+.modal-sources ul li a:hover { color: var(--ink); }
+
+/* FOOTER — fixed, never scrolls */
+.modal-footer {
+  padding: 16px 32px 20px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+}
+.modal-standard {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--ink-soft);
+  margin: 2px 2px 0 0;
+}
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  display: flex; align-items: center;
+  gap: 8px; flex-wrap: wrap; margin-top: 16px;
+}
+.filter-btn {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 7px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  background: var(--bg-alt);
+  color: var(--ink-mute);
+  cursor: pointer; transition: all 0.15s;
+  font-family: var(--font-body);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--ink); color: var(--bg-alt); border-color: var(--ink);
+}
+
+/* ── EMPTY STATE ── */
+.insights-empty {
+  grid-column: 1 / -1; text-align: center;
+  padding: 80px 24px; color: var(--ink-mute); font-size: 15px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) { .insights-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .insights-grid { grid-template-columns: 1fr; }
+  .modal { border-radius: 12px; max-height: 93vh; }
+  .modal-header { padding: 20px 20px 16px; }
+  .modal-body { padding: 20px 20px 20px; }
+  .modal-footer { padding: 14px 20px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Polar Studio Home">
+      <svg class="nav-logo-icon" viewBox="0 0 32 38" fill="none"><line x1="16" y1="2" x2="16" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="13" x2="28" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="33" x2="26" y2="33" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="nav-logo-text">POLAR</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-toggle">Services <svg viewBox="0 0 10 6" fill="currentColor"><path d="M0 0l5 6 5-6z"/></svg></span>
+        <div class="nav-dropdown-panel">
+          <a href="index.html#bim" class="mega-link"><span class="mega-link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span><div><strong>BIM &amp; Revit Support</strong><span>LOD 200–500, ISO 19650 certified</span></div></a>
+          <a href="index.html#redline" class="mega-link"><span class="mega-link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>Redline &amp; As-Built</strong><span>Convert markups to digital files</span></div></a>
+          <a href="index.html#shop" class="mega-link"><span class="mega-link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg></span><div><strong>Shop Drawings</strong><span>Fabrication-ready drafting</span></div></a>
+          <a href="index.html#fire" class="mega-link"><span class="mega-link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2s-5 5-5 10a5 5 0 0 0 10 0c0-3-2-5-2-8-2 2-3 5-3 5s-2-3 0-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span><div><strong>Fire Evacuation</strong><span>AS 3745:2010 compliant</span></div></a>
+          <a href="index.html#existing" class="mega-link"><span class="mega-link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg></span><div><strong>Existing Conditions</strong><span>Precise on-site measurement</span></div></a>
+          <a href="index.html#realestate" class="mega-link"><span class="mega-link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.5"/></svg></span><div><strong>Real Estate &amp; 3D</strong><span>Marketing visuals &amp; rendering</span></div></a>
+        </div>
+      </div>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="index.html#faq" class="nav-link">FAQ</a>
+      <a href="insights.html" class="nav-link">Insights</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Request quote</a>
+    <button class="nav-mobile-toggle" onclick="document.getElementById('mm').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mm" class="mobile-menu">
+    <a href="index.html#bim">BIM &amp; Revit Support</a>
+    <a href="index.html#redline">Redline &amp; As-Built</a>
+    <a href="index.html#shop">Shop Drawings</a>
+    <a href="index.html#fire">Fire Evacuation</a>
+    <a href="index.html#existing">Existing Conditions</a>
+    <a href="index.html#realestate">Real Estate &amp; 3D</a>
+    <a href="about.html">About</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html" class="mobile-cta">Request quote →</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Insights</span>
+    </nav>
+    <p class="eyebrow">Industry Insights</p>
+    <h1 class="h1">AEC news &amp;<br/>technical updates</h1>
+    <p class="lead">Standards changes, BIM trends, and construction industry updates relevant to Australian AEC professionals.</p>
+  </div>
+</section>
+
+<!-- INSIGHTS MAIN -->
+<section class="section section-white">
+  <div class="container">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all" onclick="filterNews(this,'all')">All</button>
+      <button class="filter-btn" data-filter="BIM &amp; Revit" onclick="filterNews(this,'BIM &amp; Revit')">BIM &amp; Revit</button>
+      <button class="filter-btn" data-filter="As-Built" onclick="filterNews(this,'As-Built')">As-Built</button>
+      <button class="filter-btn" data-filter="Shop Drawings" onclick="filterNews(this,'Shop Drawings')">Shop Drawings</button>
+      <button class="filter-btn" data-filter="Fire Evacuation" onclick="filterNews(this,'Fire Evacuation')">Fire Evacuation</button>
+      <button class="filter-btn" data-filter="Existing Conditions" onclick="filterNews(this,'Existing Conditions')">Existing Conditions</button>
+      <button class="filter-btn" data-filter="Real Estate &amp; 3D" onclick="filterNews(this,'Real Estate &amp; 3D')">Real Estate &amp; 3D</button>
+    </div>
+    <div class="insights-grid" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-final">
+  <div class="container">
+    <p class="eyebrow">Work with us</p>
+    <h2 class="h2" style="color:var(--bg-alt);">Standards-compliant drafting, delivered fast</h2>
+    <p>From BIM coordination to fire evacuation diagrams — precise documentation across all Australian states.</p>
+    <a href="contact.html" class="btn btn-light btn-arrow">Request a quote
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12.5M14.5 8L8.5 2M14.5 8l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand-block">
+        <a href="index.html" class="footer-logo">
+          <svg class="footer-logo-icon" viewBox="0 0 32 38" fill="none"><line x1="16" y1="2" x2="16" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="13" x2="28" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="33" x2="26" y2="33" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="footer-brand-text">POLAR</span>
+        </a>
+        <p class="footer-desc">Technical Documentation, BIM &amp; As-Built Services. Sydney-based team serving all of Australia.</p>
+        <div class="footer-contact">
+          <a href="mailto:polar.estudio.arquitectura@gmail.com">polar.estudio.arquitectura@gmail.com</a>
+          <a href="tel:+610430141615">+61 0430 141 615</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#bim">BIM &amp; Revit</a></li>
+          <li><a href="index.html#redline">Redline &amp; As-Built</a></li>
+          <li><a href="index.html#shop">Shop Drawings</a></li>
+          <li><a href="index.html#fire">Fire Evacuation</a></li>
+          <li><a href="index.html#existing">Existing Conditions</a></li>
+          <li><a href="index.html#realestate">Real Estate &amp; 3D</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Service Areas</h4>
+        <ul>
+          <li><a href="index.html">Sydney, NSW</a></li>
+          <li><a href="index.html">Melbourne, VIC</a></li>
+          <li><a href="index.html">Brisbane, QLD</a></li>
+          <li><a href="index.html">Perth, WA</a></li>
+          <li><a href="index.html">Adelaide, SA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Polar Studio. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <!-- HEADER — never moves -->
+    <div class="modal-header">
+      <div class="modal-header-top">
+        <div class="modal-meta" id="modalMeta"></div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">
+          <svg viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+    </div>
+
+    <!-- SCROLLABLE BODY — only this scrolls -->
+    <div class="modal-scroll">
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+
+    <!-- FOOTER — never moves -->
+    <div class="modal-footer">
+      <div id="modalStandards"></div>
+      <a href="contact.html" class="btn btn-dark btn-arrow" style="font-size:13px;padding:10px 20px;">
+        Get a quote
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12.5M14.5 8L8.5 2M14.5 8l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── NAV ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+document.querySelectorAll('#mm a').forEach(a => a.addEventListener('click', () => document.getElementById('mm').classList.remove('open')));
+
+// ── ARTICLES ──
+// To add a new article: copy one object, paste at the TOP of the array, update all fields.
+const ARTICLES = [
+  {
+    id: 15,
+    tag: "Shop Drawings",
+    date: "May 2026",
+    readTime: "3 min read",
+    title: "SafeWork NSW's Largest Compliance Blitz on Record: 736 Notices Issued — What Construction Documentation Has to Do With It",
+    summary: "In November 2025, SafeWork NSW conducted its largest-ever surprise inspection campaign, issuing 736 non-compliance notices to 261 employers. The findings have direct implications for how construction documentation is prepared on Australian sites.",
+    body: `
+      <h4>What the blitz found</h4>
+      <p>During Safe Work Month in November 2025, SafeWork NSW deployed inspectors across construction, manufacturing, healthcare, and other sectors in a three-day unannounced campaign — the largest of its kind the regulator has conducted. Results: 736 non-compliance notices issued to 261 employers. Of those, 209 notices were for working-at-heights failures, and 175 related to unsafe mobile plant or machinery practices.</p>
+      <p>The working-at-heights findings — accounting for more than 28% of all notices — are directly relevant to anyone involved in construction documentation.</p>
+      <h4>The documentation connection</h4>
+      <p>Working-at-heights non-compliance on construction sites almost always involves one of two root causes: inadequate safe work method statements (SWMS), or a disconnect between what the SWMS says and what the shop drawings and construction documentation actually show.</p>
+      <p>When shop drawings do not clearly indicate fall-risk zones, edge conditions, or the sequence of installation for elements that require elevated access, the SWMS the contractor produces cannot accurately reflect site conditions. The result is a document that satisfies the paperwork requirement but does not reflect physical reality — precisely the gap that WorkSafe inspectors are trained to identify.</p>
+      <h4>What changed with the NSW WHS Regulation 2025</h4>
+      <p>The NSW WHS Regulation 2025, which commenced 22 August 2025, strengthened several provisions relevant to construction documentation. New penalty notice offences under Schedule 18A allow SafeWork NSW to issue on-the-spot fines for certain breaches — removing the previous step of issuing an improvement notice first. The regulation also updated references to current Australian Standards, including AS/NZS 3012:2019 for electrical installations on construction sites.</p>
+      <ul>
+        <li><strong>Shop drawings and fall risk:</strong>
+        Edge conditions, penetrations, and roof access points must be clearly indicated — not left to site interpretation.</li>
+        <li><strong>Temporary works documentation:</strong>
+        If a fabricated element requires temporary propping or elevated installation, that sequence belongs in the drawing package, not only in a separate SWMS.</li>
+        <li><strong>Current Australian Standards references:</strong>
+        The 2025 Regulation references current standards. Drawings referencing superseded standards are a compliance flag during inspection.</li>
+        <li><strong>Coordination with the principal contractor:</strong>
+        Shop drawing packages issued without coordination against the principal's site safety plan create liability exposure for the issuing engineer or architect.</li>
+      </ul>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading &amp; sources</div>
+        <ul>
+          <li><a href="https://www.safework.nsw.gov.au" target="_blank" rel="noopener">SafeWork NSW — WHS Regulation 2025 and compliance campaigns</a></li>
+          <li><a href="https://www.safeworkaustralia.gov.au/media-centre/news/amendments-model-whs-laws-published" target="_blank" rel="noopener">Safe Work Australia — Model WHS laws amendments, December 2025</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS/NZS 3012:2019 Electrical installations on construction sites</a></li>
+          <li><a href="https://www.worksafetyhub.com.au" target="_blank" rel="noopener">Work Safety Hub — Weekly WHS Round-Up, December 2025</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["NSW WHS 2025", "AS/NZS 3012", "AS 4100", "SWMS"]
+  },
+  {
+    id: 14,
+    tag: "Real Estate & 3D",
+    date: "May 2026",
+    readTime: "3 min read",
+    title: "3D Walkthroughs Are No Longer Optional: What the Numbers Say About Property Marketing in Australia in 2026",
+    summary: "Properties with 3D walkthroughs sell 31% faster and generate 87% more views. With national vacancy rates at 1.5% and buyer competition at record levels, the visual presentation of a property has never mattered more.",
+    body: `
+      <h4>The numbers that changed the conversation</h4>
+      <p>For several years, 3D walkthroughs and virtual tours were positioned as a premium add-on in Australian property marketing. That positioning has shifted decisively in 2026. Properties featuring 3D walkthroughs sell 31% faster and achieve prices approximately 9% higher than comparable listings with static photography alone. Virtual tours generate 87% more views on listing portals including Domain and realestate.com.au, and deliver 300% more viewer engagement compared to flat imagery.</p>
+      <h4>Why the Australian market reached this point</h4>
+      <p>National vacancy rates sit at approximately 1.5–1.6%, meaning buyers are competing for constrained supply. Properties that can be assessed remotely — by interstate buyers, overseas investors, and time-poor owner-occupiers — have a structural advantage. Perth is forecast to see price growth of 10–12% in 2026, and mid-sized cities are outperforming Sydney and Melbourne on growth metrics. This geographic spread of demand makes virtual presentation tools operationally necessary for developers targeting buyers who are not within driving distance of the site.</p>
+      <h4>What a 2026 standard visual package looks like</h4>
+      <ul>
+        <li><strong>3D walkthrough or virtual tour:</strong>
+        Spatial capture or rendered walkthrough allowing buyers to navigate the property independently, measure rooms, and assess spatial flow without a physical visit.</li>
+        <li><strong>AI-enhanced virtual staging:</strong>
+        Empty or under-construction spaces presented with furniture and finishes. Multiple styling options for different buyer demographics are now standard on competitive listings.</li>
+        <li><strong>Accurate marketing floor plans:</strong>
+        The foundation of every visual package. A 3D walkthrough produced from an inaccurate floor plan creates the same legal risk as a static render from an uncoordinated DA drawing.</li>
+        <li><strong>Aerial and streetscape renders:</strong>
+        Contextual imagery showing the property in its neighbourhood — particularly important for off-the-plan projects where surroundings are part of the value proposition.</li>
+      </ul>
+      <h4>The floor plan accuracy problem that virtual tours expose</h4>
+      <p>One unintended consequence of immersive 3D presentations is that inaccuracies in the underlying floor plan documentation become immediately visible to buyers. A static render can obscure an awkward column position or a ceiling height that does not match expectations. A 3D walkthrough produced from uncoordinated documentation cannot. Developers who invest in high-quality visual presentations but base them on DA-stage drawings rather than coordinated construction documentation are creating a gap that buyers will now detect — and that regulators in NSW and Victoria are monitoring under off-the-plan disclosure legislation.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading &amp; sources</div>
+        <ul>
+          <li><a href="https://propertyrender.com/3d-walkthroughs-property-developments-best-practices-2026/" target="_blank" rel="noopener">PropertyRender.com — 3D Walkthroughs Best Practices 2026</a></li>
+          <li><a href="https://imagtor.com/blog/key-housing-trends-in-australia-for-2026/" target="_blank" rel="noopener">Imagtor — Key Housing Trends in Australia for 2026</a></li>
+          <li><a href="https://www.planning.nsw.gov.au" target="_blank" rel="noopener">NSW Department of Planning — Off-the-plan disclosure obligations</a></li>
+          <li><a href="https://www.proptrack.com.au" target="_blank" rel="noopener">PropTrack — Australian property market data 2026</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["Off-the-Plan", "3D Visualisation", "NSW Planning"]
+  },
+  {
+    id: 13,
+    tag: "BIM & Revit",
+    date: "May 2026",
+    readTime: "4 min read",
+    title: "Queensland Now Requires BIM on All Government Projects Over $50M: What It Means for Your Firm",
+    summary: "Queensland has made BIM mandatory at the planning phase for all major government infrastructure projects above $50 million. The mandate is expanding across state agencies — and other states are watching closely.",
+    body: `
+      <h4>The Queensland mandate and where it stands</h4>
+      <p>Queensland has been the most advanced Australian state in terms of government-mandated BIM requirements. All major government infrastructure projects valued above $50 million are now required to use BIM from the early planning phase — a threshold that captures a substantial portion of the state's infrastructure pipeline.</p>
+      <p>Several of the state's major delivery agencies have developed plans to embed BIM into their project delivery processes, including the Cross River Rail Delivery Authority, the Department of Education, the Department of Health, and the Department of Transport and Main Roads. Any firm tendering for their work needs to demonstrate BIM capability from the outset.</p>
+      <h4>Why the national picture matters</h4>
+      <p>The Australasian BIM Advisory Board (ABAB), which marked its 10th anniversary in February 2026, has consistently pushed for national consistency in digital delivery requirements. Its 2026 communiqué reaffirmed digital enablement as a national imperative, and the board's submissions to federal government have called for BIM to be mandated on Commonwealth-funded infrastructure nationally. What Queensland has implemented for projects above $50M is likely to become a broader national standard, progressively lowering the threshold and expanding to more asset types.</p>
+      <h4>What "mandatory BIM" actually requires of project teams</h4>
+      <ul>
+        <li><strong>A compliant BIM Execution Plan (BEP):</strong>
+        A documented plan agreed before work commences, covering model uses, LOD requirements, CDE protocols, and information delivery milestones.</li>
+        <li><strong>ISO 19650-aligned workflows:</strong>
+        Queensland government agencies are progressively aligning procurement with ISO 19650. Firms without documented processes are increasingly disadvantaged at tender.</li>
+        <li><strong>A nominated BIM coordinator:</strong>
+        Large projects require a named individual responsible for model coordination, clash detection, and information management across disciplines.</li>
+        <li><strong>CDE integration:</strong>
+        Models must be managed through a Common Data Environment — not shared via email. Autodesk Construction Cloud, Aconex, and Procore are the most commonly specified platforms on Queensland government projects.</li>
+      </ul>
+      <h4>The opportunity for smaller firms</h4>
+      <p>The expansion of BIM mandates creates an opportunity as well as a compliance requirement. Smaller AEC firms that develop ISO 19650-compliant workflows now will be structurally better positioned than those who treat each BIM project as a one-off. The market gap between firms that can evidence BIM capability and those that cannot is widening — fastest in Queensland, but accelerating nationally.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading &amp; sources</div>
+        <ul>
+          <li><a href="https://www.abab.net.au" target="_blank" rel="noopener">ABAB — February 2026 Communiqué: A decade of digital enablement</a></li>
+          <li><a href="https://www.dbmvircon.com/how-government-mandated-bim-standards-are-being-applied-to-projects/" target="_blank" rel="noopener">DBM Vircon — Government Mandated BIM Standards in Australia</a></li>
+          <li><a href="https://www.iso.org/standard/68078.html" target="_blank" rel="noopener">ISO 19650-2: Information management during the delivery phase</a></li>
+          <li><a href="https://www.tmr.qld.gov.au" target="_blank" rel="noopener">Queensland Department of Transport and Main Roads — Digital delivery</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["ISO 19650", "BIM", "BEP", "QLD Government", "CDE"]
+  },
+  {
+    id: 12,
+    tag: "Fire Evacuation",
+    date: "May 2026",
+    readTime: "3 min read",
+    title: "NSW WHS Regulation 2025 Is Now in Force: What Changed for Emergency Planning in Your Workplace",
+    summary: "The NSW WHS Regulation 2025 commenced on 22 August 2025, introducing on-the-spot fines, updated Standards references, and new lithium-ion battery emergency plan requirements. Here is what facilities managers need to know.",
+    body: `
+      <h4>What the NSW WHS Regulation 2025 changed</h4>
+      <p>The NSW Work Health and Safety Regulation 2025 came into effect on 22 August 2025, replacing the 2017 Regulation. While retaining the existing structure, several amendments are directly relevant to emergency planning and evacuation documentation in commercial and industrial workplaces.</p>
+      <p>The most operationally significant change for facilities managers is the introduction of new penalty notice offences under Schedule 18A. SafeWork NSW can now issue on-the-spot fines for certain breaches — without first issuing an improvement notice. For workplaces with out-of-date or non-compliant evacuation diagrams, this changes the risk profile of a routine inspection considerably.</p>
+      <h4>New emergency planning requirements to be aware of</h4>
+      <ul>
+        <li><strong>Lithium-ion battery storage:</strong>
+        Sites storing 25,000 kg or more of lithium-ion batteries must now lodge a copy of their emergency plan with Fire and Rescue NSW. This is a new obligation with no equivalent in the 2017 Regulation — affecting warehousing, logistics, and EV-related facilities.</li>
+        <li><strong>Updated Australian Standards references:</strong>
+        AS/NZS 45001:2018 replaces the older AS/NZS 4801:2001 for safety management systems. Evacuation diagrams and emergency plans that reference superseded standards are now a compliance flag.</li>
+        <li><strong>Psychosocial hazards:</strong>
+        The Regulation now explicitly requires PCBUs to apply the hierarchy of controls to psychosocial risks. Emergency response procedures that do not account for psychological safety events need to be reviewed.</li>
+        <li><strong>Extended incident notification duties:</strong>
+        Following December 2025 model WHS Act amendments, notification duties now include violent incidents and extended worker absences of 15 or more calendar days, where adopted by each jurisdiction.</li>
+      </ul>
+      <h4>What this means for evacuation diagrams specifically</h4>
+      <p>AS 3745:2010 — which governs evacuation diagrams — has not been replaced, but the enforcement environment around it has tightened considerably. The 2025 Regulation's stronger penalty provisions, combined with SafeWork NSW's track record of large-scale compliance campaigns (736 non-compliance notices in a single November 2025 blitz), mean that out-of-date diagrams now carry a materially higher risk of generating an on-the-spot fine than they did under the 2017 Regulation.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading &amp; sources</div>
+        <ul>
+          <li><a href="https://www.safework.nsw.gov.au" target="_blank" rel="noopener">SafeWork NSW — WHS Regulation 2025 (commenced 22 August 2025)</a></li>
+          <li><a href="https://www.safeworkaustralia.gov.au/media-centre/news/amendments-model-whs-laws-published" target="_blank" rel="noopener">Safe Work Australia — Model WHS laws amendments, December 2025</a></li>
+          <li><a href="https://safetypartnersaustralia.com.au/blog-new-nsw-whs-regulation-2025/" target="_blank" rel="noopener">Safety Partners Australia — NSW WHS Regulation 2025 practical guide</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS/NZS 45001:2018 and AS 3745:2010</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["NSW WHS 2025", "AS 3745:2010", "AS/NZS 45001", "PCBU"]
+  },
+  {
+    id: 11,
+    tag: "BIM & Revit",
+    date: "May 2026",
+    readTime: "4 min read",
+    title: "A Decade of ABAB: What Australia's BIM Advisory Board Has Achieved — and What Comes Next",
+    summary: "In February 2026, the Australasian BIM Advisory Board marked its 10th anniversary, framing digital enablement as a national imperative. Here is what the decade delivered — and where Australian BIM requirements are heading next.",
+    body: `
+      <h4>Ten years of coordinated BIM adoption</h4>
+      <p>The Australasian BIM Advisory Board (ABAB) was established in May 2017 by the Australasian Procurement and Construction Council (APCC) and the Australian Construction Industry Forum (ACIF), together with NATSPEC, buildingSMART, and Standards Australia. Its purpose: a coordinated approach across government, industry, and academia to BIM practices, standards, and requirements.</p>
+      <p>The February 2026 communiqué, published on the occasion of ABAB's tenth anniversary, reviewed a decade of progress and sharpened focus for what the board describes as the next phase of digital transformation. The language is notably stronger than previous editions: digital enablement is framed explicitly as a "national imperative," with the infrastructure pipeline cited as the mechanism through which BIM adoption must be accelerated.</p>
+      <h4>What the decade achieved</h4>
+      <ul>
+        <li><strong>The National BIM Portal:</strong>
+        A centralised, publicly accessible repository of BIM documents, tools, and resources hosted by NATSPEC — now the primary reference point for Australian BIM implementation.</li>
+        <li><strong>ISO 19650 Australian adoption:</strong>
+        Standards Australia's adoption of the ISO 19650 series aligned Australia's information management requirements with the global standard, enabling Australian firms to compete on international projects and meet overseas-funded infrastructure procurement requirements.</li>
+        <li><strong>State government mandates:</strong>
+        Queensland's $50M+ infrastructure mandate, Transport for NSW's Digital Engineering Framework, and Victoria's Digital Asset Strategy (VDAS) all emerged within ABAB's coordination period.</li>
+        <li><strong>The ABAB Digital Roadmap Generator:</strong>
+        A free online tool that automates digital facility and asset management planning, allowing firms of any size to generate a customised BIM implementation roadmap.</li>
+      </ul>
+      <h4>Where the next decade is heading</h4>
+      <p>The 2026 communiqué points to education and workforce development as the critical bottleneck — the supply of BIM-capable practitioners is not keeping pace with demand created by government mandates and private sector adoption.</p>
+      <p>The push toward digital twins — persistent, live models of built assets managed under ISO 19650-3 — is also named as a priority. This represents a significant shift from BIM as a design and construction tool to BIM as an operational asset management platform. For firms producing as-built documentation, the digital twin trajectory means that LOD 500 verification workflows are becoming the foundation of long-term asset management contracts, not just a handover requirement.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading &amp; sources</div>
+        <ul>
+          <li><a href="https://www.abab.net.au" target="_blank" rel="noopener">ABAB — February 2026 Communiqué: Marking a decade of ABAB</a></li>
+          <li><a href="https://bim.natspec.org" target="_blank" rel="noopener">NATSPEC BIM Portal — National BIM Guide and resources</a></li>
+          <li><a href="https://www.iso.org/standard/68078.html" target="_blank" rel="noopener">ISO 19650-2: Delivery phase information management</a></li>
+          <li><a href="https://interscale.com.au/blog/what-is-bim/" target="_blank" rel="noopener">Interscale — What Is BIM and Why It's Becoming Mandatory in 2026</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["ISO 19650", "ABAB", "NATSPEC", "Digital Twins", "LOD 500"]
+  },
+  {
+    id: 10,
+    tag: "Real Estate & 3D",
+    date: "April 2026",
+    readTime: "3 min read",
+    title: "Floor Plans That Sell: Why Marketing Floor Plans Are Not the Same as Construction Drawings",
+    summary: "Presenting a construction drawing in a sales campaign is one of the most common mistakes in Australian property marketing. Here is what a marketing floor plan actually needs to close deals.",
+    body: `
+      <h4>Two different documents for two different audiences</h4>
+      <p>A construction drawing is produced for a builder. It contains wall thicknesses, structural references, service locations, NCC annotations, and dimensioning in a format that a tradesperson or certifier can work from. A marketing floor plan is produced for a buyer. Its job is to communicate how a property feels to live in — not how it is built.</p>
+      <p>The problem in Australian property marketing is that these two documents are routinely confused. Agents receive a PDF of the architect's DA drawings and paste them into brochures and listing portals. Buyers then try to interpret symbols and conventions they have never seen before, and in many cases simply disengage.</p>
+      <h4>What makes a marketing floor plan work</h4>
+      <ul>
+        <li><strong>Clean, readable proportions:</strong>
+        Walls shown as solid filled shapes, not double lines with hatch. The layout reads clearly at thumbnail size on a mobile screen.</li>
+        <li><strong>Furniture indication:</strong>
+        Beds, sofas, dining tables, and kitchen benchtops drawn to scale so buyers can assess whether their furniture will fit — the single most common question buyers have about floor plans.</li>
+        <li><strong>Room names in buyer language:</strong>
+        "Master bedroom" not "Bed 1". "Ensuite" not "WC/SHW". "Living and dining" not "Open plan area".</li>
+        <li><strong>Solar orientation:</strong>
+        North point shown clearly, ideally with a simple sun path indicator. NSW and VIC buyers in particular are highly attentive to north-facing living areas.</li>
+        <li><strong>No technical clutter:</strong>
+        No dimension strings, no grid references, no revision clouds, no drawing numbers, no NCC annotations. None of it is relevant to a buyer and all of it reduces clarity.</li>
+      </ul>
+      <h4>The legal risk of using construction drawings in marketing</h4>
+      <p>In off-the-plan sales, the floor plan included in the contract of sale forms part of the disclosure documentation under state-based property legislation. Using a DA-stage architectural drawing that later changes in the construction documentation — as most do — can create a material discrepancy between what was represented at sale and what is delivered. NSW, VIC, and QLD have all strengthened off-the-plan disclosure obligations in recent years.</p>
+      <p>Polar Studio produces marketing floor plan graphics directly from coordinated Revit models, ensuring the visual package reflects the construction-stage layout rather than the DA scheme.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.planning.nsw.gov.au" target="_blank" rel="noopener">NSW Department of Planning — Off-the-plan disclosure reforms</a></li>
+          <li><a href="https://www.consumer.vic.gov.au" target="_blank" rel="noopener">Consumer Affairs Victoria — Off-the-plan contract requirements</a></li>
+          <li><a href="https://www.reia.com.au" target="_blank" rel="noopener">Real Estate Institute of Australia (REIA)</a></li>
+          <li><a href="https://www.abcb.gov.au" target="_blank" rel="noopener">Australian Building Codes Board — NCC documentation requirements</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["NSW Planning", "Off-the-Plan", "Marketing Plans"]
+  },
+  {
+    id: 9,
+    tag: "BIM & Revit",
+    date: "April 2026",
+    readTime: "4 min read",
+    title: "Revit Family Libraries: Why Generic Families Are Costing Australian Projects Time and Money",
+    summary: "Generic Revit families create silent errors in quantity schedules, clash detection, and construction documentation. Here is when they become a liability — and what to do about it.",
+    body: `
+      <h4>What a Revit family actually is</h4>
+      <p>In Revit, a family is a parametric component — a door, a structural column, a luminaire, a piece of mechanical equipment. Every element placed in a model is an instance of a family. The quality of those families determines the quality of everything the model produces: drawings, schedules, clash detection reports, and handover documentation.</p>
+      <p>Generic families are placeholder components. They represent a category of object — "a door", "a light fitting" — without encoding the specific geometry, clearances, or data of the actual product being specified. They are fast to place and look acceptable in plan view. They cause problems everywhere else.</p>
+      <h4>Where generic families create real project costs</h4>
+      <ul>
+        <li><strong>Quantity schedules:</strong>
+        A generic door family with no leaf thickness or frame depth will produce a schedule that does not match the actual product being ordered. Procurement teams then correct quantities manually — introducing both delay and the risk of further error.</li>
+        <li><strong>Clash detection:</strong>
+        Navisworks and other clash detection tools work from the geometry encoded in the family. A generic luminaire with no housing geometry will not clash with a sprinkler head or a duct — even when the actual products would conflict on site. The clash is found in the ceiling, not in the model.</li>
+        <li><strong>ISO 19650 compliance:</strong>
+        The standard requires that information delivered at each LOD is consistent and verified. A model populated with generic families at LOD 300 cannot be verified against the actual specified products. This creates a gap between what the model says and what the project record requires.</li>
+        <li><strong>Construction documentation:</strong>
+        Sections and details cut through generic families produce drawings that do not reflect real installation requirements — frame depths, clearances, fixing conditions — leading to RFIs from builders and fabricators.</li>
+      </ul>
+      <h4>When custom families are worth the investment</h4>
+      <p>Not every project needs fully parametric custom families for every component. The calculation is straightforward: if an element type appears more than 15–20 times in a model, or if its geometry directly affects coordination with adjacent elements (structure, services, façade), a properly configured family pays for itself quickly in reduced RFIs and schedule errors.</p>
+      <p>For repeat project types — commercial fitouts, residential developments, industrial facilities — a well-maintained family library compounds in value across projects. Polar Studio maintains project-specific family libraries to NATSPEC and ISO 19650 data standards, configurable to each client's specifications.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.natspec.com.au" target="_blank" rel="noopener">NATSPEC — National BIM Guide: model element authoring</a></li>
+          <li><a href="https://www.iso.org/standard/68078.html" target="_blank" rel="noopener">ISO 19650-2: Information requirements and LOD definitions</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 1100 and technical documentation standards</a></li>
+          <li><a href="https://www.autodesk.com/products/revit" target="_blank" rel="noopener">Autodesk Revit — Family authoring documentation</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["ISO 19650", "NATSPEC", "LOD 300", "Revit"]
+  },
+  {
+    id: 8,
+    tag: "Fire Evacuation",
+    date: "April 2026",
+    readTime: "2 min read",
+    title: "When Did You Last Update Your Evacuation Diagram? The Fitout Trigger Most Facilities Managers Miss",
+    summary: "Most facilities managers know they need evacuation diagrams. Fewer know that a simple office refurbishment legally requires them to be updated. Here is what triggers the obligation under AS 3745:2010.",
+    body: `
+      <h4>The trigger most businesses miss</h4>
+      <p>AS 3745:2010 — Planning for Emergencies in Facilities — is clear on the update requirement: evacuation diagrams must be reviewed and updated whenever a material change is made to the facility. The difficulty is that "material change" is interpreted narrowly by many facilities managers — typically as a major structural renovation — when in practice the threshold is much lower.</p>
+      <p>A new office fitout that repositions workstations, installs a new partitioned meeting room, or relocates a fire extinguisher constitutes a material change. A change in tenancy that alters the occupancy pattern of a floor is a material change. Even a building management system upgrade that relocates warden intercom phone points triggers a review obligation.</p>
+      <h4>Physical changes that require a diagram update</h4>
+      <ul>
+        <li><strong>New or relocated partitions:</strong>
+        Any change to the floor plan that alters egress paths or sightlines to exit signage.</li>
+        <li><strong>Changes to exit doors:</strong>
+        Relocation, addition, or removal of any exit — including the installation of new access control on a previously open door.</li>
+        <li><strong>Fire safety equipment moved or added:</strong>
+        Extinguishers, hose reels, AEDs, warden intercom phones — all must be shown at their current locations.</li>
+        <li><strong>Change in assembly area:</strong>
+        If the building's designated assembly point changes — a common outcome of surrounding development or changed access — all diagrams must be updated.</li>
+        <li><strong>Change of occupancy or tenancy:</strong>
+        A new tenant taking a floor alters the emergency warden structure and may change evacuation routes.</li>
+      </ul>
+      <h4>What happens in a WorkSafe inspection</h4>
+      <p>State WHS regulators across NSW, VIC, QLD, WA, and SA treat out-of-date evacuation diagrams as a compliance failure. Inspectors check the diagram against the physical floor plan. Where they do not match, improvement notices are issued. In more serious cases — particularly where the diagram shows an exit that no longer exists, or omits a recently installed hazard — the exposure extends to the PCBU (person conducting a business or undertaking) directly.</p>
+      <p>Polar Studio produces updated AS 3745:2010 compliant diagrams with a standard turnaround of 48–72 hours from receipt of current floor plans. If plans are not available, we can work from a site visit and measurements.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 3745:2010 Planning for Emergencies in Facilities</a></li>
+          <li><a href="https://www.safeworkaustralia.gov.au" target="_blank" rel="noopener">Safe Work Australia — Emergency plans: employer obligations</a></li>
+          <li><a href="https://www.safework.nsw.gov.au" target="_blank" rel="noopener">SafeWork NSW — WHS inspection and improvement notices</a></li>
+          <li><a href="https://www.worksafe.vic.gov.au" target="_blank" rel="noopener">WorkSafe Victoria — Emergency management compliance</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["AS 3745:2010", "WHS", "PCBU"]
+  },
+  {
+    id: 7,
+    tag: "Existing Conditions",
+    date: "April 2026",
+    readTime: "3 min read",
+    title: "Measured Surveys Before a Commercial Fitout: What Your Architect Actually Needs",
+    summary: "The floor plans a building owner provides to a tenant are almost never sufficient for a fitout design. Here is what a proper measured survey delivers — and why it prevents costly surprises during construction.",
+    body: `
+      <h4>Why the landlord's drawings are not enough</h4>
+      <p>When a tenant engages an architect for a commercial fitout, the starting point is almost always a PDF floor plan provided by the building owner or property manager. These drawings are typically produced from the original construction documentation — which may be 10, 20, or 30 years old — and have rarely been updated to reflect the cumulative effect of previous tenancies, service modifications, or structural changes.</p>
+      <p>Using these drawings as a design base introduces risk at every stage. The architect designs to dimensions that do not exist. The fitout contractor prices from plans that do not reflect site conditions. Variations emerge during construction. The tenant pays for them.</p>
+      <h4>What a measured survey actually captures</h4>
+      <ul>
+        <li><strong>Confirmed floor dimensions:</strong>
+        Every wall, column face, and opening measured and drawn to scale — not assumed from a decades-old construction drawing.</li>
+        <li><strong>Finished floor to underside of slab heights:</strong>
+        The single most important dimension for a fitout. Specifying a ceiling height requires knowing what is actually available above it, including structural depth, existing services, and bulkheads.</li>
+        <li><strong>Reflected ceiling plan:</strong>
+        Existing lighting, sprinkler heads, diffusers, smoke detectors, and bulkhead positions — all of which must be coordinated in the new fitout design.</li>
+        <li><strong>Services and riser locations:</strong>
+        Electrical distribution boards, hydraulic risers, mechanical plant connections, and communications pathways. These constrain the fitout layout and cannot be relocated without significant cost.</li>
+        <li><strong>Editable DWG output:</strong>
+        A properly formatted AutoCAD base drawing the architect can design directly on top of — not a PDF they have to redraw from scratch.</li>
+      </ul>
+      <h4>The cost of skipping the survey</h4>
+      <p>The most common fitout variations in Australian commercial construction are dimension-related: a joinery unit that does not fit, a meeting room that cannot achieve the specified ceiling height, a kitchen that conflicts with an existing penetration. Each variation adds cost and programme delay. A measured survey of a typical commercial floor costs a fraction of a single variation.</p>
+      <p>Polar Studio carries out on-site measurement surveys across Sydney, Melbourne, Brisbane, Perth, and Adelaide, delivering AutoCAD DWG base plans typically within 3–5 business days of site visit.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 1100.301 Architectural drawing conventions</a></li>
+          <li><a href="https://www.propertycouncil.com.au" target="_blank" rel="noopener">Property Council of Australia — Commercial fitout guidelines</a></li>
+          <li><a href="https://www.abcb.gov.au" target="_blank" rel="noopener">Australian Building Codes Board — NCC Volume One fitout provisions</a></li>
+          <li><a href="https://www.airah.org.au" target="_blank" rel="noopener">AIRAH — Services coordination in fitout projects</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["AS 1100", "NCC", "AutoCAD DWG"]
+  },
+  {
+    id: 6,
+    tag: "Shop Drawings",
+    date: "April 2026",
+    readTime: "3 min read",
+    title: "Why Your Fabricator Keeps Requesting Drawing Revisions — And How to Stop It",
+    summary: "Repeated RFIs and revision requests from fabricators are almost always caused by the same set of avoidable errors in shop drawings. Here is what is missing, and how to fix it upstream.",
+    body: `
+      <h4>The revision cycle and what drives it</h4>
+      <p>A shop drawing revision request from a fabricator — steel, joinery, glazing, mechanical — is not a sign of a difficult contractor. It is a sign that the drawing did not contain the information needed to fabricate the component correctly. The fabricator has two options: make an assumption and risk building something wrong, or request clarification. A competent fabricator will always choose the second.</p>
+      <p>The pattern is consistent across trades: most revision requests come back to five categories of missing or ambiguous information. Fixing them upstream, before issue to the workshop, is always cheaper than fixing them after.</p>
+      <h4>The five most common causes of revision requests</h4>
+      <ul>
+        <li><strong>Tolerances not specified:</strong>
+        Workshop fabrication and site installation operate to different tolerances. A steel frame dimensioned to its exact design size with no installation tolerance noted will not fit against an in-situ concrete structure. AS/NZS 1554 (structural steel welding) and AS 4100 (steel structures) both define tolerance requirements — they must be reflected in the drawing.</li>
+        <li><strong>Insufficient section views:</strong>
+        A plan and elevation alone rarely contain enough information for a fabricator to price and build accurately. Junctions, connections, and fixing conditions require section cuts — particularly at corners, interfaces with structure, and points where different trades meet.</li>
+        <li><strong>Normative references missing or incorrect:</strong>
+        Shop drawings must reference the applicable standard for each material and process. A glazing drawing without reference to AS 1288 (glass in buildings) or a steel drawing without AS 4100 leaves the fabricator uncertain about what compliance looks like.</li>
+        <li><strong>No finish or material call-outs:</strong>
+        "Painted" is not a finish specification. A fabricator needs the paint system, the substrate preparation standard, and the colour reference. Without it, what gets delivered may be technically correct in form and structurally wrong in finish.</li>
+        <li><strong>Drawings not coordinated with structure:</strong>
+        The most expensive revision requests occur when a fabricated component arrives on site and the structure it is meant to attach to is in a different position than the drawing showed. Shop drawings must be checked against the current structural drawings before issue — not against the architectural intent drawing.</li>
+      </ul>
+      <p>Polar Studio produces shop drawings coordinated against current structural and services models, with full AS/NZS normative references and tolerance notes included as standard.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 4100 Steel structures</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS/NZS 1554 Structural steel welding</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 1288 Glass in buildings</a></li>
+          <li><a href="https://www.aisc.com.au" target="_blank" rel="noopener">Australian Institute of Steel Construction (AISC) — Fabrication guidance</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["AS 4100", "AS/NZS 1554", "AS 1288", "AS 1100"]
+  },
+  {
+    id: 5,
+    tag: "As-Built",
+    date: "April 2026",
+    readTime: "3 min read",
+    title: "The Handover Problem: Why As-Built Documentation Is Still the Most Common Construction Dispute in Australia",
+    summary: "Discrepancies between design drawings and what was actually built remain a leading cause of disputes at practical completion. LOD 500 documentation prevents the problem — but only when the workflow starts early.",
+    body: `
+      <h4>The gap between what was designed and what was built</h4>
+      <p>Across Australian construction projects of all scales, one issue appears with remarkable consistency at practical completion: the as-built record does not match the physical asset. Walls in different positions, services routed around obstructions, structural elements altered during construction — all undocumented.</p>
+      <p>This gap creates immediate problems. Facility managers cannot plan maintenance without knowing where services actually run. Tenants attempting fitouts discover they are working from inaccurate base drawings. Regulators reviewing compliance documentation find records that do not reflect the built state. Disputes follow.</p>
+      <h4>Why redlines get lost</h4>
+      <p>The Australian Institute of Building Surveyors and state-based construction bodies consistently identify documentation deficiencies as a primary factor in post-completion disputes. The pattern is well-established: redlines collected on site during construction are either lost, filed without being incorporated into final drawings, or simply never issued to the drafting team at all.</p>
+      <p>The result is a handover package that is technically non-compliant with the contract — even when the physical construction itself is sound.</p>
+      <h4>What LOD 500 actually means</h4>
+      <p>Level of Development 500 is commonly misunderstood. It does not mean a highly detailed model — it means a <em>verified</em> model. An LOD 500 element has been field-verified: its geometry, location, and properties have been confirmed to reflect actual installed conditions, not design intent.</p>
+      <p>For a genuine LOD 500 as-built record, every redline collected during construction must be incorporated, checked, and documented. That process requires a systematic workflow between site teams, project managers, and the drafting partner — established at project start, not at handover.</p>
+      <h4>How to prevent the dispute before it starts</h4>
+      <ul>
+        <li><strong>Redline collection protocol:</strong>
+        Establish the process at project start — not at practical completion.</li>
+        <li><strong>Named responsibility:</strong>
+        Assign redline consolidation to a specific role, not "the team".</li>
+        <li><strong>Contractual LOD 500 requirement:</strong>
+        Set the handover standard explicitly in the construction contract.</li>
+        <li><strong>Early drafting engagement:</strong>
+        Engage your drafting partner during construction, not only at the end.</li>
+        <li><strong>Milestone packages:</strong>
+        Issue interim as-built packages at structure complete and services rough-in complete — rather than one final push.</li>
+      </ul>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 1100 Technical Drawing series</a></li>
+          <li><a href="https://www.iso.org/standard/75315.html" target="_blank" rel="noopener">ISO 19650-3: Information management — Operational phase of assets</a></li>
+          <li><a href="https://www.aibs.com.au" target="_blank" rel="noopener">Australian Institute of Building Surveyors (AIBS)</a></li>
+          <li><a href="https://www.masterbuilders.com.au" target="_blank" rel="noopener">Master Builders Australia — Contract documentation guidance</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["AS 1100", "ISO 19650-3", "LOD 500"]
+  },
+  {
+    id: 4,
+    tag: "Real Estate & 3D",
+    date: "April 2026",
+    readTime: "3 min read",
+    title: "Off-the-Plan Visualisation in 2026: What Buyers in Australia Expect Before Signing",
+    summary: "The standard for off-the-plan visual packages has shifted in the Australian market. A single hero render no longer closes deals — here is what a competitive pre-sales suite now requires.",
+    body: `
+      <h4>Buyer expectations have changed permanently</h4>
+      <p>The combination of rising construction costs, high-profile project failures, and greater consumer sophistication has fundamentally changed what Australian property buyers accept before signing a contract on an unbuilt property. The static hero render that defined off-the-plan marketing a decade ago is no longer enough.</p>
+      <p>Developers and their agents are finding that buyers — particularly in the owner-occupier segment — are doing more due diligence before exchange. They want to understand the property spatially, not just aesthetically. They want to see their specific apartment, not the project's showstopper unit. They want daylight studies, floor-to-ceiling heights confirmed visually, and kitchen and bathroom details rendered in enough resolution to make an informed decision.</p>
+      <h4>What a competitive 2026 pre-sales package looks like</h4>
+      <ul>
+        <li><strong>Exterior renders (2–3 angles):</strong>
+        Dawn or dusk lighting for hero imagery; daytime context renders expected alongside.</li>
+        <li><strong>Interior renders per typology:</strong>
+        At minimum, living area and master bedroom per apartment type — not per building.</li>
+        <li><strong>Formatted marketing floor plans:</strong>
+        Clean, dimensioned, with furniture indication — not raw CAD output.</li>
+        <li><strong>Amenity renders:</strong>
+        Lobby, rooftop, pool, gym — whichever amenities are part of the sales proposition.</li>
+        <li><strong>Virtual staging where applicable:</strong>
+        For stock that will be sold vacant, furnished renders demonstrating liveability.</li>
+      </ul>
+      <h4>Why floor plan accuracy matters for legal risk</h4>
+      <p>A critical and often overlooked element of off-the-plan visualisation is the accuracy of the underlying floor plan. Marketing renders produced from plans that have not been properly coordinated with the structural and services models can show layouts that are not actually deliverable — column positions, service risers, or floor-to-ceiling heights that change between the DA-approved scheme and the construction documentation set.</p>
+      <p>When buyers purchase based on materials that do not reflect the final product, the legal and reputational exposure for developers is significant. Starting the visualisation process from a coordinated, construction-stage floor plan — rather than the DA drawing — reduces this risk substantially.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.proptrack.com.au" target="_blank" rel="noopener">PropTrack — Australian property market research</a></li>
+          <li><a href="https://www.planning.nsw.gov.au" target="_blank" rel="noopener">NSW Department of Planning — Off-the-plan contract reforms</a></li>
+          <li><a href="https://www.consumer.vic.gov.au" target="_blank" rel="noopener">Consumer Affairs Victoria — Off-the-plan purchases guidance</a></li>
+          <li><a href="https://www.reia.com.au" target="_blank" rel="noopener">Real Estate Institute of Australia (REIA)</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["DA Documentation", "3D Visualisation", "Marketing Plans"]
+  },
+  {
+    id: 3,
+    tag: "BIM & Revit",
+    date: "April 2026",
+    readTime: "4 min read",
+    title: "Why LOD 300 Is No Longer Enough for Sydney DA Submissions",
+    summary: "Greater Sydney councils are raising the bar on BIM model detail for development applications. Projects that relied on LOD 200–300 models for approval submissions are now being asked for more — and earlier in the process.",
+    body: `
+      <h4>What is changing in Sydney DA submissions</h4>
+      <p>Development application requirements in Greater Sydney have been evolving steadily, driven by the NSW Government's push to integrate BIM into the planning approval process. Several councils — particularly those within the Greater Sydney Commission's strategic centres and the Transport Oriented Development (TOD) precincts — are now requesting or expecting a higher level of model maturity at DA lodgement than was standard practice even two years ago.</p>
+      <p>The practical effect: models that previously qualified for DA submission at LOD 200 (massing, area schedules, basic geometry) are now being reviewed against a higher bar. Specifically, councils are asking for coordination evidence — confirmation that the proposed building envelope, structural grid, and services zones do not conflict — before they will progress an application.</p>
+      <h4>What LOD 300 includes — and where its limits are</h4>
+      <p>LOD 300 requires that model elements be represented as specific systems, objects, or assemblies, with accurate quantity, size, shape, location, and orientation. It is sufficient for contractor pricing and early design coordination. However, it does not include definitive connection details, specific product information, or confirmed services routing.</p>
+      <p>The issue in DA submissions is not that LOD 300 is inadequate for the approval decision itself — it is that many models submitted as LOD 300 are effectively LOD 200 in all but name. The geometry is present, but the coordination has not been done.</p>
+      <h4>What councils and certifiers are actually looking for</h4>
+      <ul>
+        <li><strong>Structural grid coordination:</strong>
+        Demonstrated alignment with the architectural envelope.</li>
+        <li><strong>Services zone allocation:</strong>
+        Enough to confirm ceiling heights and riser locations are feasible.</li>
+        <li><strong>Stair and lift core geometry:</strong>
+        Confirmed at the structural level, not just the architectural.</li>
+        <li><strong>Car park layout and ramp geometry:</strong>
+        Checked against AS 2890.1 before lodgement.</li>
+        <li><strong>Fire compartmentation zones:</strong>
+        Indicated in the model or in coordinated drawings.</li>
+      </ul>
+      <h4>The practical implication for project teams</h4>
+      <p>Earlier BIM engagement. Projects that historically engaged a BIM partner at DD or CD stage are now finding it beneficial — and in some cases necessary — to have a coordinated model from late schematic design onwards. The cost of producing a DA-ready coordinated model is considerably lower than the cost of a delayed approval or a council request for further information.</p>
+      <p>NSW Planning has been progressively developing its ePlanning digital tools, and the trajectory is clearly toward model-based submissions becoming more formalised. Teams that build the discipline now will be well ahead of what is likely to become mandatory for certain project types within the next planning cycle.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.planning.nsw.gov.au/planning-rules/how-land-is-zoned/transport-oriented-development" target="_blank" rel="noopener">NSW Planning — Transport Oriented Development Program</a></li>
+          <li><a href="https://www.greater.sydney" target="_blank" rel="noopener">Greater Sydney Commission — Strategic planning framework</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 2890.1 Parking facilities</a></li>
+          <li><a href="https://www.planning.nsw.gov.au/e-planning" target="_blank" rel="noopener">NSW ePlanning — Digital lodgement portal</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["ISO 19650", "LOD 300", "NSW Planning", "AS 2890.1"]
+  },
+  {
+    id: 2,
+    tag: "Fire Evacuation",
+    date: "April 2026",
+    readTime: "2 min read",
+    title: "AS 3745:2010 Compliance: The Most Common Mistakes Found in Australian Evacuation Diagrams",
+    summary: "WorkSafe inspections are identifying the same recurring errors in evacuation diagrams across commercial and industrial sites. Most are straightforward to fix — if you know what to look for.",
+    body: `
+      <h4>The standard and what it requires</h4>
+      <p>AS 3745:2010 — Planning for Emergencies in Facilities — governs how evacuation diagrams must be produced, displayed, and maintained in Australian workplaces. While most facilities managers are aware of the requirement, the quality of diagrams in actual use varies significantly. WorkSafe and state-level WHS regulators flag the same issues repeatedly during site inspections.</p>
+      <h4>The five most common compliance failures</h4>
+      <ul>
+        <li><strong>No north point:</strong>
+        The standard requires a clearly marked orientation indicator. It sounds minor — but it consistently appears in audit findings.</li>
+        <li><strong>Warden intercom phones not mapped:</strong>
+        All emergency communication equipment must be shown, not just fire extinguishers and hose reels.</li>
+        <li><strong>Assembly area not identified:</strong>
+        Many diagrams show exit routes but omit the designated assembly point, which must be clearly marked.</li>
+        <li><strong>Diagram not to scale:</strong>
+        Evacuees need to navigate from the diagram — distorted floor plans create confusion under pressure.</li>
+        <li><strong>Out-of-date after fitout:</strong>
+        Post-renovation diagrams that still reflect the previous floor layout are a liability issue, not just a compliance one.</li>
+      </ul>
+      <h4>How often should diagrams be reviewed?</h4>
+      <p>AS 3745:2010 requires evacuation diagrams to be reviewed whenever a material change to the facility occurs — including changes to exits, occupancy, or floor plan layout. Even without physical changes, a periodic review (typically annual) is considered best practice by WHS regulators across NSW, VIC, QLD, WA, and SA.</p>
+      <p>Polar Studio produces AS 3745:2010 compliant evacuation diagrams with a standard turnaround of 48–72 hours for most commercial buildings. All diagrams include north point, emergency equipment mapping, egress paths, and assembly areas as standard.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — AS 3745:2010 Planning for Emergencies in Facilities</a></li>
+          <li><a href="https://www.safeworkaustralia.gov.au" target="_blank" rel="noopener">Safe Work Australia — Emergency plans and procedures</a></li>
+          <li><a href="https://www.safework.nsw.gov.au" target="_blank" rel="noopener">SafeWork NSW — WHS compliance resources</a></li>
+          <li><a href="https://www.abcb.gov.au" target="_blank" rel="noopener">Australian Building Codes Board — NCC Section E (fire safety)</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["AS 3745:2010", "WHS", "NCC Section E"]
+  },
+  {
+    id: 1,
+    tag: "BIM & Revit",
+    date: "April 2026",
+    readTime: "3 min read",
+    title: "ISO 19650 in Practice: What Australian Tier 1 Contractors Are Now Requiring",
+    summary: "Major contractors are making ISO 19650 compliance non-negotiable on government and infrastructure projects. Here is what that means for your BIM deliverables.",
+    body: `
+      <h4>From differentiator to baseline requirement</h4>
+      <p>Over the past 18 months, a clear pattern has emerged across Australian Tier 1 construction contracts: ISO 19650 compliance is no longer a differentiator — it is a baseline requirement. Projects funded through federal and state infrastructure pipelines are increasingly specifying it in their BIM Execution Plans (BEPs) as a condition of engagement.</p>
+      <h4>What ISO 19650 actually requires</h4>
+      <p>The standard covers the entire information management lifecycle of a project, from appointment through to asset operation. For drafting and BIM partners, the most operationally relevant parts are Parts 2 and 3 — covering the delivery phase and operational phase respectively. Part 2 sets out how information should be produced, exchanged, and verified at each stage of a project.</p>
+      <p>In practical terms, this means BIM models must be structured to an agreed Common Data Environment (CDE), with defined naming conventions, status codes, and revision protocols. Deliverables need to be traceable, version-controlled, and issued through a formal approval workflow.</p>
+      <h4>Where most firms fall short</h4>
+      <ul>
+        <li><strong>Inconsistent naming conventions:</strong>
+        Applied differently across disciplines, breaking CDE traceability.</li>
+        <li><strong>No Information Delivery Plan:</strong>
+        Without a documented IDP at project start, deliverables are undefined.</li>
+        <li><strong>Informal file sharing:</strong>
+        Models shared via email or Dropbox instead of through a formal CDE.</li>
+        <li><strong>LOD not specified per element:</strong>
+        Leading to disputes at handover about what was actually agreed.</li>
+      </ul>
+      <h4>What this means for your projects</h4>
+      <p>If you are tendering for government infrastructure, commercial, or mixed-use projects above a certain scale, having an ISO 19650-registered BIM partner is increasingly the difference between qualifying and not. Procurement teams are asking for BIM credentials upfront, before scope discussion.</p>
+      <p>At Polar Studio, all BIM models are produced under ISO 19650 protocols. We maintain full version history, apply NATSPEC-aligned naming conventions, and can deliver into any CDE platform — including Autodesk Construction Cloud, Aconex, or client-specified environments.</p>
+      <div class="modal-sources">
+        <div class="modal-sources-title">Further reading</div>
+        <ul>
+          <li><a href="https://www.iso.org/standard/68078.html" target="_blank" rel="noopener">ISO 19650-2: Information management — Delivery phase of assets</a></li>
+          <li><a href="https://www.standards.org.au" target="_blank" rel="noopener">Standards Australia — ISO 19650 Australian adoption</a></li>
+          <li><a href="https://www.natspec.com.au" target="_blank" rel="noopener">NATSPEC — National BIM Guide and BIM Management Plan</a></li>
+          <li><a href="https://www.infrastructure.gov.au" target="_blank" rel="noopener">Australian Government — National Infrastructure Pipeline</a></li>
+        </ul>
+      </div>
+    `,
+    standards: ["ISO 19650", "BIM", "NATSPEC"]
+  }
+];
+
+// ── RENDER CARDS ──
+function renderCards(filter) {
+  const grid = document.getElementById('newsGrid');
+  const filtered = filter === 'all' ? ARTICLES : ARTICLES.filter(a => a.tag === filter);
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="insights-empty">No articles in this category yet. Check back soon.</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(a => `
+    <article class="news-card" onclick="openModal(${a.id})" tabindex="0" role="button" aria-label="Read: ${a.title}">
+      <div class="news-card-body">
+        <div class="news-meta">
+          <span class="news-tag">${a.tag}</span>
+          <span class="news-date">${a.date}</span>
+        </div>
+        <h3>${a.title}</h3>
+        <p>${a.summary}</p>
+      </div>
+      <div class="news-card-footer">
+        <span class="news-read-more">Read more <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12.5M14.5 8L8.5 2M14.5 8l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="news-read-time">${a.readTime}</span>
+      </div>
+    </article>
+  `).join('');
+  grid.querySelectorAll('.news-card').forEach(c => {
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') c.click(); });
+  });
+}
+
+// ── FILTER ──
+function filterNews(btn, filter) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards(filter);
+}
+
+// ── MODAL ──
+function openModal(id) {
+  const a = ARTICLES.find(x => x.id === id);
+  if (!a) return;
+  document.getElementById('modalMeta').innerHTML =
+    `<span class="news-tag">${a.tag}</span><span style="font-size:12px;color:var(--ink-mute);margin-left:8px;">${a.date} &mdash; ${a.readTime}</span>`;
+  document.getElementById('modalTitle').textContent = a.title;
+  document.getElementById('modalBody').innerHTML = a.body;
+  document.getElementById('modalStandards').innerHTML =
+    a.standards.map(s => `<span class="modal-standard">${s}</span>`).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.querySelector('.modal-scroll').scrollTop = 0;
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── INIT ──
+renderCards('all');
+</script>
+
+</body>
+</html>

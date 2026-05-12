@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Polar Studio | BIM, Technical Drafting & As-Built Services Australia</title>
 <meta name="description" content="Expert BIM, technical drafting and As-Built documentation across Australia. LOD 200-500 Revit, AS 1100 compliant, ISO 19650 registered. Sydney-based team serving Melbourne, Brisbane, Perth & Adelaide."/>
+<meta name="keywords" content="BIM Australia, Revit support Sydney, technical drafting, as-built documentation, shop drawings, AS 1100, ISO 19650, LOD 500, fire evacuation diagrams, AEC drafting services"/>
 <meta property="og:title" content="Polar Studio | BIM & Technical Drafting Australia"/>
 <meta property="og:description" content="High-precision BIM, CAD, and As-Built solutions for Australia's AEC leaders."/>
 <meta property="og:type" content="website"/>
@@ -16,51 +17,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="polar.css"/>
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-<!-- End Google Tag Manager -->
-
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6DPJ8CY549"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6DPJ8CY549', {
-    'send_page_view': true,
-    'cookie_flags': 'SameSite=None;Secure'
-  });
-  
-  // Track form submissions
-  document.addEventListener('DOMContentLoaded', function() {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-      form.addEventListener('submit', function(e) {
-        gtag('event', 'form_submission', {
-          'event_category': 'Contact',
-          'event_label': 'Quote Request Form'
-        });
-      });
-    });
-  });
-  
-  // Track CTA button clicks
-  document.addEventListener('click', function(e) {
-    if (e.target.closest('.btn-arrow') || e.target.closest('.nav-cta')) {
-      const buttonText = e.target.textContent || e.target.closest('a').textContent;
-      gtag('event', 'cta_click', {
-        'event_category': 'Engagement',
-        'event_label': buttonText.trim()
-      });
-    }
-  });
-</script>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+61-430-141-615",
-    "email": "polar.estudio.arquitectura@gmail.com",
+    "email": "info@polarstudio.com.au",
     "contactType": "customer service",
     "areaServed": "AU",
     "availableLanguage": ["English"]
@@ -91,105 +47,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {"@type": "City", "name": "Adelaide"}
   ],
   "foundingDate": "2017",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Technical Drafting & BIM Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "BIM & Revit Support",
-          "description": "Full-spectrum BIM coordination from LOD 200 to LOD 500. ISO 19650 certified workflows with NATSPEC-aligned information delivery. Supports federated models across Autodesk Construction Cloud, Aconex, and client-specified Common Data Environments.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Polar Studio"
-          },
-          "areaServed": "AU",
-          "category": "BIM Coordination"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Redline Cleanup & As-Built Documentation",
-          "description": "Convert marked-up PDFs and field sketches into AS 1100 compliant CAD drawings. Full As-Built packages meeting ISO 19650-3 requirements for transition to facility management. Includes native Revit and AutoCAD deliverables.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Polar Studio"
-          },
-          "areaServed": "AU",
-          "category": "As-Built Documentation"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Shop Drawings & Fabrication Drafting",
-          "description": "Workshop-ready fabrication drawings produced to AS 1100.501 structural engineering standards. Includes connection details, weld schedules per AS/NZS 1554, and material callouts. Coordinated with design intent and site constraints.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Polar Studio"
-          },
-          "areaServed": "AU",
-          "category": "Shop Drawings"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Fire Evacuation Diagrams",
-          "description": "AS 3745:2010 compliant evacuation diagrams for commercial and industrial facilities. Includes emergency exits, equipment locations, assembly areas, and refuge points. Meets WorkSafe and WHS regulatory requirements across all Australian states.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Polar Studio"
-          },
-          "areaServed": "AU",
-          "category": "Fire Safety Documentation"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Existing Conditions Drafting",
-          "description": "Measured surveys and existing building documentation to AS 1100.401 engineering survey standards. Produces coordinated floor plans, sections, and elevations referenced to Australian Height Datum (AHD). Supports NCC Volume Two compliance pathways.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Polar Studio"
-          },
-          "areaServed": "AU",
-          "category": "Measured Surveys"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Real Estate Marketing & 3D Visualization",
-          "description": "High-quality 3D renders, virtual tours, and marketing floor plans for property sales and leasing. Photorealistic visualization for residential, commercial, and mixed-use developments across Australia.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Polar Studio"
-          },
-          "areaServed": "AU",
-          "category": "3D Visualization"
-        }
-      }
-    ]
-  }
+  "makesOffer": [
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "BIM & Revit Support"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Redline Cleanup & As-Built Documentation"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Shop Drawings & Fabrication Drafting"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Evacuation Diagrams AS 3745"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Existing Conditions Drafting"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Real Estate Marketing & 3D Visualization"}}
+  ]
 }
 </script>
 </head>
 <body>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 <!-- ═══ NAV ═══ -->
 <nav class="nav" id="mainNav">
@@ -277,7 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="h2">Expert BIM, CAD, and As-Built solutions<br/>for the AEC industry</h2>
     </div>
     <div class="precision-grid">
-      <div class="p-card p-card-big reveal">
+      <div class="p-card p-card-big">
         <img class="p-card-big-img" src="assets/images/services/bim-revit-precision.jpg" alt="BIM Revit modeling roofing plans" loading="lazy"/>
         <div class="p-card-big-body">
           <p class="p-card-eyebrow">BIM &amp; Revit Modeling</p>
@@ -288,18 +157,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </a>
         </div>
       </div>
-      <div class="p-card reveal">
+      <div class="p-card">
         <div class="p-num">AS<br/>1100</div>
         <p style="margin-top:16px;">Certified compliance with Australian drafting standards for accuracy and reliability.</p>
       </div>
-      <div class="p-card reveal">
+      <div class="p-card">
         <div class="p-icon">
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 12C8.4 12 12 8.4 12 4c0 4.4 3.6 8 8 8-4.4 0-8 3.6-8 8 0-4.4-3.6-8-8-8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
         <h3 class="h4" style="margin-top:16px;">AutoCAD Drafting</h3>
         <p style="margin-top:8px;">2D/3D technical plans for engineering and construction.</p>
       </div>
-      <div class="p-card reveal">
+      <div class="p-card">
         <div class="p-icon">
           <svg viewBox="0 0 24 24" fill="none"><path d="M9.25 18.7C6.6 17.6 4.75 15 4.75 12c0-3 1.85-5.6 4.5-6.7M14.75 5.3c2.6 1.1 4.5 3.7 4.5 6.7 0 3-1.9 5.6-4.5 6.7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
@@ -320,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="service-text">
         <span class="service-tag">Service 01</span>
         <h2 class="h2">BIM &amp; Revit Support</h2>
-        <p class="lead">Advanced 3D modelling and specialised technical support to optimise workflows for architecture and engineering firms across Australia. All models produced under <strong>ISO 19650</strong> protocols with NATSPEC-aligned information delivery, supporting seamless integration into federated Common Data Environments (CDE) for multi-disciplinary coordination.</p>
+        <p class="lead">Advanced 3D modelling and specialised technical support to optimise workflows for architecture and engineering firms across Australia.</p>
         <ul class="service-features">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>LOD 200–500</strong> coordination from schematic to as-built precision</span></li>
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Clash detection</strong> via Navisworks — resolve conflicts before construction</span></li>
@@ -343,7 +212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="service-text">
         <span class="service-tag">Service 02</span>
         <h2 class="h2">Redline Cleanup &amp; As-Built Documentation</h2>
-        <p class="lead">Digitise markups. Ensure compliance. Professional conversion of on-site markups into high-accuracy final documentation for project handovers. All deliverables produced to <strong>AS 1100</strong> drafting standards with <strong>ISO 19650-3</strong> asset information requirements for seamless transition to facility management systems.</p>
+        <p class="lead">Digitise markups. Ensure compliance. Professional conversion of on-site markups into high-accuracy final documentation for project handovers.</p>
         <ul class="service-features">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Redline conversion workflow</strong> — manual markups to precise Revit/AutoCAD files</span></li>
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>As-Constructed deliverables</strong> reflecting actual site conditions</span></li>
@@ -366,7 +235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="service-text">
         <span class="service-tag">Service 03</span>
         <h2 class="h2">Shop Drawings &amp; Fabrication Drafting</h2>
-        <p class="lead">Precise, manufacturer-ready drafting that bridges the gap between design intent and physical production for Australian fabricators and contractors. Structural steel drawings produced to <strong>AS 1100.501</strong> standards with welding schedules per <strong>AS/NZS 1554</strong>, coordinated with design loads and site constraints.</p>
+        <p class="lead">Precise, manufacturer-ready drafting that bridges the gap between design intent and physical production for Australian fabricators and contractors.</p>
         <ul class="service-features">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Steel fabrication drawings</strong> to AS/NZS standards</span></li>
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Joinery &amp; millwork</strong> shop drawings — kitchens, furniture, cabinetry</span></li>
@@ -389,7 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="service-text">
         <span class="service-tag">Service 04</span>
         <h2 class="h2">Fire Evacuation Diagrams (AS 3745:2010)</h2>
-        <p class="lead">Fully compliant, clear evacuation plans formatted strictly to Australian Standards to ensure site safety and legal peace of mind. Meets <strong>AS 3745:2010</strong> requirements and <strong>BCA Section E</strong> egress provisions, satisfying WorkSafe and WHS regulatory inspections across all Australian states.</p>
+        <p class="lead">Fully compliant, clear evacuation plans formatted strictly to Australian Standards to ensure site safety and legal peace of mind.</p>
         <ul class="service-features">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>AS 3745:2010 compliance</strong> — meets the Australian Standard for emergency planning</span></li>
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Clear egress paths</strong> — exits, routes, and assembly areas marked</span></li>
@@ -412,7 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="service-text">
         <span class="service-tag">Service 05</span>
         <h2 class="h2">Existing Conditions Drafting</h2>
-        <p class="lead">Accurate on-site measurement surveys and existing conditions documentation — providing a reliable foundation for your renovation, fit-out, or new design. Produced to <strong>AS 1100.401</strong> engineering survey standards with level references to Australian Height Datum (AHD), supporting <strong>NCC Volume Two</strong> compliance pathways for existing building alterations.</p>
+        <p class="lead">Accurate on-site measurement surveys and existing conditions documentation — providing a reliable foundation for your renovation, fit-out, or new design.</p>
         <ul class="service-features">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>On-site measurement surveys</strong> — complete dimensional documentation</span></li>
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>As-existing floor plans</strong> — walls, openings, and architectural features</span></li>
@@ -435,7 +304,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="service-text">
         <span class="service-tag">Service 06</span>
         <h2 class="h2">Real Estate Marketing &amp; 3D Visualization</h2>
-        <p class="lead">High-impact visual assets and hyper-realistic 3D renderings designed to help property agencies and developers across Australia close deals faster. All marketing floor plans coordinated with accurate dimensional data, ensuring advertised layouts match as-built reality and comply with consumer protection standards.</p>
+        <p class="lead">High-impact visual assets and hyper-realistic 3D renderings designed to help property agencies and developers across Australia close deals faster.</p>
         <ul class="service-features">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Photorealistic 3D renders</strong> — exterior and interior at marketing quality</span></li>
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span> <span><strong>Off-the-plan packages</strong> — complete visual suites for pre-sales</span></li>
@@ -545,7 +414,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </a>
         <p class="footer-desc">Technical Documentation, BIM &amp; As-Built Services. Sydney-based team serving all of Australia.</p>
         <div class="footer-contact">
-          <a href="mailto:polar.estudio.arquitectura@gmail.com">polar.estudio.arquitectura@gmail.com</a>
+          <a href="mailto:info@polarstudio.com.au">info@polarstudio.com.au</a>
           <a href="tel:+610430141615">+61 0430 141 615</a>
         </div>
       </div>

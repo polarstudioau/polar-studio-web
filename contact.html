@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,27 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="polar.css"/>
-
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6DPJ8CY549"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6DPJ8CY549');
-  
-  // Track form submission success
-  window.addEventListener('load', function() {
-    if (window.location.pathname === '/thank-you.html') {
-      gtag('event', 'conversion', {
-        'send_to': 'G-6DPJ8CY549/CONVERSION_ID',
-        'event_category': 'Contact',
-        'event_label': 'Quote Request Submitted'
-      });
-    }
-  });
-</script>
-
 <style>
 .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--nav-h)); margin-top: var(--nav-h); }
 .contact-left { padding: 80px 56px 80px 32px; background: var(--bg); }
@@ -139,7 +118,7 @@
           </div>
           <div>
             <div class="contact-item-label">Email</div>
-            <div class="contact-item-value"><a href="mailto:polar.estudio.arquitectura@gmail.com">polar.estudio.arquitectura@gmail.com</a></div>
+            <div class="contact-item-value"><a href="mailto:info@polarstudio.com.au">info@polarstudio.com.au</a></div>
           </div>
         </div>
         <div class="contact-item">
@@ -249,7 +228,7 @@
         </a>
         <p class="footer-desc">Technical Documentation, BIM &amp; As-Built Services. Sydney-based team serving all of Australia.</p>
         <div class="footer-contact">
-          <a href="mailto:polar.estudio.arquitectura@gmail.com">polar.estudio.arquitectura@gmail.com</a>
+          <a href="mailto:info@polarstudio.com.au">info@polarstudio.com.au</a>
           <a href="tel:+610430141615">+61 0430 141 615</a>
         </div>
       </div>
@@ -329,7 +308,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('quoteForm');
   const btn = document.getElementById('submitBtn');
-  btn.textContent = 'Sending...';
+  btn.textContent = 'Enviando...';
   btn.disabled = true;
 
   fetch('/', {
@@ -346,7 +325,7 @@ function handleSubmit(e) {
   })
   .catch(() => {
     document.getElementById('errorMsg').style.display = 'block';
-    btn.textContent = 'Retry';
+    btn.textContent = 'Reintentar';
     btn.disabled = false;
   });
 }

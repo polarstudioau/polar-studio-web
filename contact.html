@@ -127,7 +127,7 @@
           </div>
           <div>
             <div class="contact-item-label">Phone</div>
-            <div class="contact-item-value"><a href="tel:+610430141615">+61 0430 141 615</a></div>
+            <div class="contact-item-value"><a href="tel:+61430141615">+61 0430 141 615</a></div>
           </div>
         </div>
         <div class="contact-item">
@@ -161,7 +161,7 @@
       <h2 class="h3" style="margin-bottom:8px;">Request a quote</h2>
       <p style="color:var(--ink-mute); margin-bottom:32px;">Tell us about your project and we'll get back to you with a tailored quote.</p>
 
-      <form id="quoteForm" name="quote-request" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thank-you.html" onsubmit="handleSubmit(event)" name="quote-request" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+      <form id="quoteForm" name="quote-request" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thank-you.html" onsubmit="handleSubmit(event)">
         <input type="hidden" name="form-name" value="quote-request"/>
         <p style="display:none;"><input name="bot-field"/></p>
 
@@ -229,7 +229,7 @@
         <p class="footer-desc">Technical Documentation, BIM &amp; As-Built Services. Sydney-based team serving all of Australia.</p>
         <div class="footer-contact">
           <a href="mailto:info@polarstudio.com.au">info@polarstudio.com.au</a>
-          <a href="tel:+610430141615">+61 0430 141 615</a>
+          <a href="tel:+61430141615">+61 0430 141 615</a>
         </div>
       </div>
       <div class="footer-col">
@@ -279,6 +279,20 @@
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
 
+// Dropdown toggle for touch/click devices
+document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = toggle.closest('.nav-dropdown');
+    dropdown.classList.toggle('open');
+  });
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+  }
+});
+
 // Mobile menu toggle (hamburger <-> X icon, body lock, close on link click)
 const mm = document.getElementById('mm');
 const mobileToggle = document.getElementById('mobileToggle');
@@ -308,7 +322,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('quoteForm');
   const btn = document.getElementById('submitBtn');
-  btn.textContent = 'Enviando...';
+  btn.textContent = 'Sending...';
   btn.disabled = true;
 
   fetch('/', {
@@ -325,7 +339,7 @@ function handleSubmit(e) {
   })
   .catch(() => {
     document.getElementById('errorMsg').style.display = 'block';
-    btn.textContent = 'Reintentar';
+    btn.textContent = 'Try again';
     btn.disabled = false;
   });
 }

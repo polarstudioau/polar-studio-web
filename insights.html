@@ -340,8 +340,9 @@
       <a href="contact.html" class="nav-link">Contact</a>
     </div>
     <a href="contact.html" class="nav-cta">Request quote</a>
-    <button class="nav-mobile-toggle" onclick="document.getElementById('mm').classList.toggle('open')" aria-label="Menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
     </button>
   </div>
   <div id="mm" class="mobile-menu">
@@ -411,8 +412,8 @@
         </a>
         <p class="footer-desc">Technical Documentation, BIM &amp; As-Built Services. Sydney-based team serving all of Australia.</p>
         <div class="footer-contact">
-          <a href="mailto:polar.estudio.arquitectura@gmail.com">polar.estudio.arquitectura@gmail.com</a>
-          <a href="tel:+610430141615">+61 0430 141 615</a>
+          <a href="mailto:info@polarstudio.com.au">info@polarstudio.com.au</a>
+          <a href="tel:+61430141615">+61 0430 141 615</a>
         </div>
       </div>
       <div class="footer-col">
@@ -493,7 +494,43 @@
 // ── NAV ──
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
-document.querySelectorAll('#mm a').forEach(a => a.addEventListener('click', () => document.getElementById('mm').classList.remove('open')));
+
+// Dropdown toggle for touch/click devices
+document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = toggle.closest('.nav-dropdown');
+    dropdown.classList.toggle('open');
+  });
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+  }
+});
+
+// Mobile menu toggle
+const mm = document.getElementById('mm');
+const mobileToggle = document.getElementById('mobileToggle');
+mobileToggle.addEventListener('click', () => {
+  const isOpen = mm.classList.toggle('open');
+  document.body.classList.toggle('menu-open', isOpen);
+  mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.querySelectorAll('#mm a').forEach(a => {
+  a.addEventListener('click', () => {
+    mm.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mm.classList.contains('open')) {
+    mm.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+  }
+});
 
 // ── ARTICLES ──
 // To add a new article: copy one object, paste at the TOP of the array, update all fields.
